@@ -1515,3 +1515,19 @@ curl -X POST http://localhost:3000/api/vendors \
 **Developer:** Muhammad Arif Pratama  
 **Email:** arifpratama5@gmail.com  
 **Tanggal:** 4 Agustus 2026
+
+---
+
+## Changelog
+
+### v1.2 (4 Agustus 2026)
+- Added GRN creation endpoint documentation
+- Added three-way match endpoint documentation with proper logic
+- Documented all role-based access requirements per endpoint
+- Added production environment variables section
+- Added cURL examples for testing
+
+### v1.1 (4 Agustus 2026)
+- Added RBAC documentation for all endpoints
+- Added user management endpoints
+- Updated invoice and analytics endpoints
