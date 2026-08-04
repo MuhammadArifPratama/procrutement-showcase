@@ -1112,6 +1112,24 @@ ISC License
 
 ## Changelog
 
+### v1.2 (4 Agustus 2026)
+- Fixed GRN creation bug - items parsing from JSONB
+- Fixed three-way matching logic with proper type handling
+- Implemented frontend role-based navigation (`renderNavByRole`)
+- Added `data-roles` attributes to dashboard navigation items
+- Replaced all `console.error` with structured `logger.error`
+- Removed internal error details from API responses
+- Fixed duplicate HTML IDs (`pr-form` → `pr-quick-form`)
+- Added Jest open handle cleanup with `pool.end()` in test suites
+- Added rate limiting middleware (login: 5/15min, API: 100/min)
+- Added app healthcheck to docker-compose
+- Added `wget` to Dockerfile for healthcheck support
+- Secured CORS with whitelist (`ALLOWED_ORIGINS` env var)
+- Removed hardcoded SESSION_SECRET fallback
+- Updated `SESSION_COOKIE_SECURE` default to `false` with production override
+- Removed plaintext password from seed logs
+- Added production environment variables documentation
+
 ### v1.1 (4 Agustus 2026)
 - Implemented RBAC with 8 roles
 - Added force password change on first login
