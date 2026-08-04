@@ -486,3 +486,18 @@ A: Pastikan JavaScript diaktifkan dan tidak ada error di console browser.
 **Developer:** Muhammad Arif Pratama  
 **Email:** arifpratama5@gmail.com  
 **Tanggal:** 4 Agustus 2026
+
+---
+
+## Changelog
+
+### v1.2 (4 Agustus 2026)
+- Added detailed three-way matching guide with examples
+- Added GRN creation step-by-step instructions
+- Added production access notes (landing page vs direct login)
+- Updated FAQ with common issues and solutions
+
+### v1.1 (4 Agustus 2026)
+- Added RBAC user guide per role
+- Added force password change instructions
+- Added user management section for admin
