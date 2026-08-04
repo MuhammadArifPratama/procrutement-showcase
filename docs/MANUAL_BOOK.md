@@ -256,14 +256,60 @@ Sistem approval otomatis berdasarkan nilai PR:
 
 ### 6.2 Three-Way Matching
 
-1. Buka menu **Invoice ▸ Three-Way Match**
-2. Pilih PO, GRN, dan Invoice yang akan dicocokkan
-3. Klik **Mulai Matching**
-4. Sistem akan memeriksa:
-   - **Amount Match:** Jumlah PO vs Invoice
-   - **Quantity Match:** Jumlah barang PO vs GRN
-   - **GRN Match:** Barang sudah diterima
-5. Hasil matching akan ditampilkan
+Three-Way Matching adalah proses verifikasi otomatis yang memastikan ketiga dokumen berikut cocok sebelum pembayaran:
+1. **PO (Purchase Order)** — Pesanan pembelian yang telah dikirim ke vendor
+2. **GRN (Goods Receipt Note)** — Bukti penerimaan barang
+3. **Invoice** — Tagihan dari vendor
+
+#### Langkah-langkah Three-Way Matching
+
+1. Pastikan PO sudah dalam status **DELIVERED**
+2. Buka menu **Invoice ▸ Three-Way Match**
+3. Pilih **PO**, **GRN**, dan **Invoice** yang akan dicocokkan
+4. Klik **Mulai Matching**
+5. Sistem akan memeriksa 3 kondisi:
+
+| Check | Deskripsi | Logika |
+|-------|-----------|--------|
+| **Amount Match** | Jumlah di PO sama dengan jumlah di Invoice | `po.total_amount === invoice.amount` |
+| **Quantity Match** | Item dan jumlah barang di GRN sama dengan PO | `JSON.stringify(grn.items) === JSON.stringify(po.items)` |
+| **GRN Match** | Semua item di PO telah diterima | `grn.items.length === po.items.length` |
+
+6. Hasil matching akan ditampilkan:
+
+| Status | Arti |
+|--------|------|
+| **MATCHED** | Semua pengecekan berhasil, invoice siap dibayar |
+| **MISMATCHED** | Ada perbedaan antara PO, GRN, dan/atau Invoice |
+
+#### Contoh Skenario
+
+**Skenario 1: MATCHED**
+- PO: Rp 10.000.000, 10 unit barang
+- GRN: 10 unit barang diterima
+- Invoice: Rp 10.000.000
+- Hasil: **MATCHED** ✅
+
+**Skenario 2: MISMATCHED (Amount)**
+- PO: Rp 10.000.000
+- Invoice: Rp 9.500.000
+- Hasil: **MISMATCHED** ❌ (Amount tidak cocok)
+
+**Skenario 3: MISMATCHED (Quantity)**
+- PO: 10 unit barang
+- GRN: 8 unit barang diterima
+- Hasil: **MISMATCHED** ❌ (Quantity tidak cocok)
+
+#### Role yang Bisa Melakukan Three-Way Matching
+- ADMIN
+- SUPER_ADMIN
+- FINANCE
+- MANAGER
+
+#### Setelah Three-Way Match Berhasil
+- Status invoice berubah menjadi **MATCHED**
+- Anda dapat mencetak **Payment Voucher** sebagai bukti pembayaran
+- Pembayaran dapat diproses oleh Finance
 
 ### 6.3 GRN (Goods Receipt Note)
 
