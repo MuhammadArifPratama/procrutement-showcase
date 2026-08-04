@@ -739,5 +739,17 @@ describe('RBAC Tests', () => {
 
 ---
 
+## Changelog
+
+### v1.1 (4 Agustus 2026)
+- Implemented RBAC with 8 roles
+- Added `requireRole` middleware
+- Updated all routes with role-based guards
+- Added frontend `renderNavByRole()` implementation
+- Added `data-roles` attributes to navigation items
+- Updated permission matrix per module
+
+---
+
 **Disusun oleh:** Muhammad Arif Pratama  
 **Tanggal:** 4 Agustus 2026
